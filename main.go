@@ -5,12 +5,13 @@ import (
 	"log"
 	"net/http"
 	"os"
-
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
+
+const projectDirName = "todo-app"
 
 type Todo struct {
     gorm.Model
@@ -26,7 +27,9 @@ func getTodos(db *gorm.DB) []Todo {
 }
 
 func main() {
-	err := godotenv.Load()
+    cwd, _ := os.Getwd()
+    err := godotenv.Load(cwd + `/.env`)
+
 	if err != nil {
 		log.Fatal("Error loading .env file")
 	}
