@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo App</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        padding: 20px;
+      }
+      .container {
+        width: 80%;
+        margin: auto;
+        overflow: hidden;
+      }
+      #todo-list {
+        list-style: none;
+        padding: 0;
+      }
+      #todo-list li {
+        background: #fff;
+        padding: 10px;
+        margin-bottom: 5px;
+      }
+      .task {
+        float: left;
+      }
+      .done {
+        float: right;
+      }
+
+      .todo-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+      }
+      .todo-item.completed {
+        text-decoration: line-through;
+        color: #aaa;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Todo App</h1>
+      <!--todo form의 서브밋 버튼을 클릭하면 /add-task 경로로 post 요청을 보냄-->
+      <form id="todo-form" method="post" action="/add-task">
+        <input
+          type="text"
+          id="new-task"
+          name="task"
+          placeholder="Enter a new task" />
+        <input type="submit" value="Add Task" />
+      </form>
+      <ul id="todo-list">
+        {{range .}}
+        <li class="todo-item">
+          <span>{{.Task}}</span>
+          <div>
+            <form method="post" action="/delete-task">
+              <input type="hidden" name="taskId" value="{{.ID}}" />
+              <button type="submit" class="delete-btn">Delete</button>
+            </form>
+          </div>
+        </li>
+        {{end}}
+      </ul>
+    </div>
+    <script>
+      // JavaScript to handle form submission and task display
+    </script>
+  </body>
+</html>
