@@ -5,7 +5,6 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
@@ -14,10 +13,9 @@ import (
 )
 
 type Todo struct {
-	ID        int       `gorm:"column:id"`
+    gorm.Model
 	Task      string    `gorm:"column:task"`
 	Done      bool      `gorm:"column:done"`
-	CreatedAt time.Time `gorm:"column:created_at"`
 }
 
 func getTodos(db *gorm.DB) []Todo {
@@ -44,6 +42,9 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+	// 테이블 생성
+	// Go에서 
+	db.AutoMigrate(&Todo{})
 
 	r.GET("/", func(c *gin.Context) {
 		todos := getTodos(db)
