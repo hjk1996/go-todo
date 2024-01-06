@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"html/template"
 	"embed"
 	"github.com/gin-gonic/gin"
 	"gorm.io/driver/mysql"
@@ -11,8 +12,7 @@ import (
 )
 
 //go:embed templates/*
-var templatesFS embed.FS
-
+var templates embed.FS
 
 const dsn = "admin:test1234@tcp(todo-rds.cngkce8yenk4.ap-northeast-2.rds.amazonaws.com:3306)/gotodo?charset=utf8mb4&parseTime=True&loc=Local"
 
@@ -34,7 +34,9 @@ func main() {
 	// initialize router
 	r := gin.Default()
 	// load HTML templates
-	r.LoadHTMLGlob("templates/*")
+
+	tmpl := template.Must(template.New("").ParseFS(templates, "templates/*"))
+    r.SetHTMLTemplate(tmpl)
 
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	// connect to db
