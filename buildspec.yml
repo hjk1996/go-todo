@@ -27,3 +27,4 @@ artifacts:
     - scripts/start.sh
     - scripts/stop.sh
     - appspec.yml
+    - .env
