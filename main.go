@@ -43,7 +43,6 @@ func main() {
 		log.Fatal(err)
 	}
 	// 테이블 생성
-	// Go에서 
 	db.AutoMigrate(&Todo{})
 
 	r.GET("/", func(c *gin.Context) {
