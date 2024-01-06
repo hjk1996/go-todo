@@ -59,7 +59,7 @@ func main() {
 			Task: task,
 			Done: false,
 		}
-		res := db.Create(&newTodo)
+ 		res := db.Create(&newTodo)
 
 		if res.Error != nil {
 			fmt.Println(res.Error)
@@ -77,6 +77,6 @@ func main() {
 		c.Redirect(http.StatusFound, "/")
 	})
 
-	r.Run("localhost:8080")
+	r.Run(":8080")
 
 }
