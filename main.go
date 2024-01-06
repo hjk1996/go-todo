@@ -4,10 +4,15 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"embed"
 	"github.com/gin-gonic/gin"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
+
+//go:embed templates/*
+var templatesFS embed.FS
+
 
 const dsn = "admin:test1234@tcp(todo-rds.cngkce8yenk4.ap-northeast-2.rds.amazonaws.com:3306)/gotodo?charset=utf8mb4&parseTime=True&loc=Local"
 
