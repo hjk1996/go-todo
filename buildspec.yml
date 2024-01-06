@@ -26,4 +26,5 @@ artifacts:
     - todo-app
     - scripts/start.sh
     - scripts/stop.sh
+    - appspec.yml
   discard-paths: yes # 파일의 목적지 상에 경로를 무시하겠다.
