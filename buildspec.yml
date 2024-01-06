@@ -17,7 +17,7 @@ phases:
       - go build -o todo-app
 
   post_build:
-    commands:
+  commands:
       - echo Build completed on `date`
 
 # 아티팩트는 배포 단계로 넘어가는 파일을 의미함
