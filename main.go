@@ -4,14 +4,12 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"os"
 	"github.com/gin-gonic/gin"
-	"github.com/joho/godotenv"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
 
-const projectDirName = "todo-app"
+const dsn = "admin:test1234@tcp(todo-rds.cngkce8yenk4.ap-northeast-2.rds.amazonaws.com:3306)/gotodo?charset=utf8mb4&parseTime=True&loc=Local"
 
 type Todo struct {
     gorm.Model
@@ -27,18 +25,12 @@ func getTodos(db *gorm.DB) []Todo {
 }
 
 func main() {
-    cwd, _ := os.Getwd()
-    err := godotenv.Load(cwd + `/.env`)
-
-	if err != nil {
-		log.Fatal("Error loading .env file")
-	}
 
 	// initialize router
 	r := gin.Default()
 	// load HTML templates
 	r.LoadHTMLGlob("templates/*")
-	dsn := os.Getenv("DATABASE_URL")
+
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	// connect to db
 	if err != nil {
