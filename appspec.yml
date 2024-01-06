@@ -1,0 +1,16 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    # destination은 자동으로 작업 경로로 설정됨
+    destination: /var/www/todo-app
+file_exists_behavior: OVERWRITE
+hooks:
+  ApplicationStart:
+    - location: scripts/start.sh
+      timeout: 300
+      runas: root
+  ApplicationStop:
+    - location: scripts/stop.sh
+      timeout: 300
+      runas: root

@@ -1,0 +1,29 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo Installing Go
+      - wget https://dl.google.com/go/go1.21.5.linux-amd64.tar.gz
+      - tar -xzf go1.21.5.linux-amd64.tar.gz
+      - mv go /usr/local
+      - export PATH=$PATH:/usr/local/go/bin
+      - export GOPATH=$HOME/go
+      - go version
+
+  build:
+    commands:
+      - echo Building the Go todo-app
+      - go build -o todo-app
+
+  post_build:
+    commands:
+      - echo Build completed on `date`
+
+# 아티팩트는 배포 단계로 넘어가는 파일을 의미함
+artifacts: 
+  files: # 빌드후에 배포단계로 옮길 파일들.
+    - todo-app
+    - scripts/start.sh
+    - scripts/stop.sh
+  discard-paths: yes # 파일의 목적지 상에 경로를 무시하겠다.
