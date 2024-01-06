@@ -28,3 +28,4 @@ artifacts:
     - scripts/stop.sh
     - appspec.yml
     - .env
+    - templates/**
